@@ -1,0 +1,17 @@
+{
+  "name": "renamer",
+  "version": "1.0.0",
+  "bin": "./index.js",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch:test": "nodemon -e js -w test -x 'npm test'",
+    "test": "tap ./test/*_test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "1.8.1",
+    "tap": "2.3.0"
+  }
+}
