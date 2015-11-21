@@ -1,26 +1,39 @@
 var fs = require('fs');
 var path = require('path');
 
-function dirs (srcpath) {
+function dirsSync (srcpath) {
+  // console.log("dirsSync, srcpath:", srcpath);
   return fs.readdirSync(srcpath).filter(function (file) {
     return fs.statSync(path.join(srcpath, file)).isDirectory();
   });
 }
 
-function isExt(filePath, ext) {
+function hasExt(filePath, ext) {
   var filePathExt = path.extname(filePath);
   return filePathExt === ext || filePathExt === ('.' + ext);
 }
 
-function findFirst (srcpath, ext) {
-  var dirArray = fs.readdirSync(srcpath);
-  for(var i = 0; i < dirArray.length; i++) {
-    if(isExt(dirArray[i], ext)) return dirArray[i];
+function findFirstFileSync (srcpath, ext) {
+  // console.log("findFirstFileSync, srcpath:", srcpath);
+  var readDirRes = fs.readdirSync(srcpath);
+  for(var i = 0; i < readDirRes.length; i++) {
+    if(hasExt(readDirRes[i], ext)) return readDirRes[i];
+  }
+  return null;
+}
+
+function findFirstDirSync (srcpath) {
+  // console.log("findFirstDirSync, srcpath:", srcpath);
+  var readDirRes = fs.readdirSync(srcpath);
+  for(var i = 0; i < readDirRes.length; i++) {
+    if( fs.statSync(path.join(srcpath, readDirRes[i])).isDirectory() ) return readDirRes[i];
   }
   return null;
 }
 
 module.exports = {
-  dirs: dirs,
-  findFirst: findFirst
+  dirsSync: dirsSync,
+  findFirstFileSync: findFirstFileSync,
+  findFirstDirSync: findFirstDirSync,
+  hasExt: hasExt
 };

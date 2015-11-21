@@ -8,10 +8,13 @@
     "watch:test": "nodemon -e js -w test -x 'npm test'",
     "test": "tap ./test/*_test.js"
   },
-  "author": "",
+  "author": "Justin Calleja",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "1.8.1",
     "tap": "2.3.0"
+  },
+  "dependencies": {
+    "rimraf": "2.4.4"
   }
 }
